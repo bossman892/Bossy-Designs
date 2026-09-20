@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bossy Designs | Nairobi Web Studio</title>
+  <meta name="description" content="Bossy Designs builds premium websites and digital systems for Kenyan businesses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: '#131313',
+            'surface-container': '#201f1f',
+            'surface-container-low': '#1c1b1b',
+            'surface-container-lowest': '#0e0e0e',
+            'surface-container-high': '#2a2a2a',
+            'on-surface': '#e5e2e1',
+            'on-surface-variant': '#e5bdbb',
+            primary: '#ffb3b1',
+            'primary-container': '#c8102e',
+            secondary: '#ffb68b',
+            'secondary-container': '#ff7f1c',
+            tertiary: '#e5bdbb',
+            'on-primary': '#680011',
+            'on-primary-container': '#ffdad8',
+            'on-secondary': '#522300',
+            'on-tertiary': '#432a29',
+            outline: '#ac8887',
+            'outline-variant': '#5c403f',
+            'on-secondary-container': '#602a00',
+            'on-primary-fixed': '#410007'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overscroll-behavior: none; }
+    ::-webkit-scrollbar { display: none; }
+    .mobile-nav-panel { transition: transform 0.25s ease, opacity 0.25s ease; transform: translateX(100%); opacity: 0; pointer-events: none; }
+    .mobile-nav-panel.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+    .mobile-nav-backdrop { transition: opacity 0.25s ease; opacity: 0; pointer-events: none; }
+    .mobile-nav-backdrop.open { opacity: 1; pointer-events: auto; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-high">
+    <div class="w-full bg-secondary-container text-surface-container-lowest overflow-hidden py-1 border-b border-surface-container-lowest">
+      <div class="flex whitespace-nowrap animate-[marquee_18s_linear_infinite] text-[10px] font-bold uppercase tracking-[0.25em]">
+        <span class="px-4">Nairobi Built // Kenyan Owned // World-Class Code // M-Pesa Ready // Fast On Safaricom // Designed To Sell</span>
+        <span class="px-4">//</span>
+        <span class="px-4">Nairobi Built // Kenyan Owned // World-Class Code // M-Pesa Ready // Fast On Safaricom // Designed To Sell</span>
+      </div>
+    </div>
+    <div class="h-20 px-4 md:px-8 lg:px-12">
+      <div class="mx-auto flex h-full max-w-7xl items-center justify-between">
+        <a href="#home" class="flex items-center gap-3">
+          <img src="image assets/Bold BOSSY Logo with Energetic Orange Detail.png" alt="Bossy Designs logo" class="h-8 w-auto object-contain" />
+          <span class="font-heading text-2xl font-black uppercase tracking-tight">Bossy</span>
+        </a>
+
+        <nav class="nav-links hidden items-center gap-2 md:flex">
+          <a href="#home" class="active rounded-sm border border-surface-container-high bg-surface-container-high px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface">Home</a>
+          <a href="project.html" class="rounded-sm px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface">Work</a>
+          <a href="#services" class="rounded-sm px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface">Services</a>
+          <a href="#about" class="rounded-sm px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface">About</a>
+          <a href="contact.html" class="rounded-sm px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="contact.html" class="hidden rounded-sm bg-primary-container px-5 py-3 font-heading text-sm font-black uppercase tracking-wide text-on-primary shadow-[4px_4px_0px_0px_#ff7f1c] transition hover:-translate-x-0.5 hover:-translate-y-0.5 sm:inline-flex">Start a Project</a>
+          <button id="mobileMenuToggle" class="flex h-10 w-10 items-center justify-center border border-surface-container-high bg-surface-container-lowest text-on-surface md:hidden" aria-label="Toggle menu">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop fixed inset-0 z-40 bg-black/60 md:hidden"></div>
+  <aside id="mobileNavPanel" class="mobile-nav-panel fixed right-0 top-0 z-50 flex h-full w-[80%] max-w-sm flex-col border-l border-surface-container-high bg-surface-container-lowest p-6 md:hidden">
+    <div class="mb-8 flex items-center justify-between">
+      <span class="font-heading text-2xl uppercase tracking-tight">Menu</span>
+      <button id="mobileMenuClose" class="flex h-10 w-10 items-center justify-center border border-surface-container-high text-on-surface" aria-label="Close menu">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+    </div>
+    <nav class="nav-links flex flex-col gap-2">
+      <a href="#home" class="active rounded-sm bg-surface-container-high px-4 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface">Home</a>
+      <a href="project.html" class="rounded-sm px-4 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Work</a>
+      <a href="#services" class="rounded-sm px-4 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Services</a>
+      <a href="#about" class="rounded-sm px-4 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">About</a>
+      <a href="contact.html" class="rounded-sm px-4 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Contact</a>
+    </nav>
+    <div class="mt-auto border-t border-surface-container-high pt-6">
+      <a href="contact.html" class="flex w-full items-center justify-center bg-primary-container px-5 py-3 font-heading text-sm font-black uppercase tracking-wide text-on-primary shadow-[3px_3px_0px_0px_#ff7f1c]">Start a Project</a>
+    </div>
+  </aside>
+
+  <main class="pt-28">
+    <section id="home" class="relative overflow-hidden px-4 pb-16 pt-10 md:px-8 lg:px-12 lg:pb-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-6 flex flex-wrap items-center gap-3">
+          <span class="bg-primary-container px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-on-primary">#BossMode // Online</span>
+          <span class="bg-surface-container-lowest px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Nairobi, Kenya</span>
+        </div>
+        <div class="max-w-5xl">
+          <h1 class="font-heading text-5xl uppercase leading-none tracking-[-0.05em] text-on-surface sm:text-6xl lg:text-8xl">
+            We don't build websites.<br />
+            <span class="text-primary-container">We build digital empires.</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg text-on-surface-variant">
+            Serious websites for serious Kenyan businesses. Fast-loading, mobile-first, and built to turn visitors into paying customers.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="contact.html" class="inline-flex items-center gap-2 bg-primary-container px-7 py-4 font-heading text-sm font-black uppercase tracking-wide text-on-primary shadow-[4px_4px_0px_0px_#ff7f1c] transition hover:-translate-x-0.5 hover:-translate-y-0.5">
+              Start a project
+              <span class="material-symbols-outlined text-lg">arrow_forward</span>
+            </a>
+            <a href="project.html" class="inline-flex items-center gap-2 bg-surface-container px-7 py-4 font-heading text-sm font-black uppercase tracking-wide text-on-surface hover:bg-surface-container-high">See our work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-surface px-4 py-16 md:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-10">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-secondary-container">// What we do best</p>
+          <h2 class="mt-3 font-heading text-4xl uppercase tracking-tight text-on-surface">Core services</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="border border-surface-container-high bg-surface-container-low p-8">
+            <div class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-secondary-container">// Module 01</div>
+            <h3 class="mt-4 font-heading text-3xl uppercase tracking-tight text-on-surface">Web design</h3>
+            <p class="mt-4 text-on-surface-variant">Sites that look sharp, feel premium, and load fast on any Kenyan network.</p>
+          </div>
+          <div class="border border-surface-container-high bg-surface-container-low p-8">
+            <div class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-secondary-container">// Module 02</div>
+            <h3 class="mt-4 font-heading text-3xl uppercase tracking-tight text-on-surface">Web development</h3>
+            <p class="mt-4 text-on-surface-variant">Custom landing pages, portals, and business platforms built for conversion and speed.</p>
+          </div>
+          <div class="border border-surface-container-high bg-surface-container-low p-8">
+            <div class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-secondary-container">// Module 03</div>
+            <h3 class="mt-4 font-heading text-3xl uppercase tracking-tight text-on-surface">Brand identity</h3>
+            <p class="mt-4 text-on-surface-variant">Visual identity and marketing systems that make businesses look serious and memorable.</p>
+          </div>
+          <div class="border border-surface-container-high bg-surface-container-low p-8">
+            <div class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-secondary-container">// Module 04</div>
+            <h3 class="mt-4 font-heading text-3xl uppercase tracking-tight text-on-surface">Digital growth</h3>
+            <p class="mt-4 text-on-surface-variant">WhatsApp automation, SEO and conversion-focused funnels tuned for real results.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-surface-container-lowest px-4 py-16 md:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+          <img src="image assets/screen.png" alt="Sam founder portrait" class="w-full border border-surface-container-high object-cover object-center" />
+        </div>
+        <div>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-secondary-container">// Meet the founder</p>
+          <h2 class="mt-3 font-heading text-4xl uppercase tracking-tight text-on-surface">Nairobi-built. World-class standards.</h2>
+          <p class="mt-5 text-lg text-on-surface-variant">
+            Hi, I'm Sam. I started Bossy Designs to build digital assets for Kenyan businesses that look premium, load fast, and convert visitors into customers.
+          </p>
+          <a href="https://wa.me/254796625193" target="_blank" rel="noopener" class="mt-7 inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-on-surface hover:text-secondary-container">
+            <span class="material-symbols-outlined text-lg text-secondary-container">chat</span>
+            Talk on WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="px-4 py-16 md:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-secondary-container">// Recent work</p>
+            <h2 class="mt-3 font-heading text-4xl uppercase tracking-tight text-on-surface">Selected projects</h2>
+          </div>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          <article class="border border-surface-container-high bg-surface-container-low">
+            <img src="image assets/IMG-20260807-WA0022.jpg" alt="Project preview" class="h-56 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="font-heading text-2xl uppercase tracking-tight text-on-surface">Cedar Haven Retreat</h3>
+              <p class="mt-3 text-on-surface-variant">Hospitality booking experience and guest portal.</p>
+            </div>
+          </article>
+          <article class="border border-surface-container-high bg-surface-container-low">
+            <img src="image assets/file.webp" alt="Project preview" class="h-56 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="font-heading text-2xl uppercase tracking-tight text-on-surface">Mercy Rolling Skating Nation</h3>
+              <p class="mt-3 text-on-surface-variant">Community platform and event management hub.</p>
+            </div>
+          </article>
+          <article class="border border-surface-container-high bg-surface-container-low">
+            <img src="image assets/IMG_1159.JPG" alt="Project preview" class="h-56 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="font-heading text-2xl uppercase tracking-tight text-on-surface">Jennie Birthday Website</h3>
+              <p class="mt-3 text-on-surface-variant">Immersive celebration experience and guestbook.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-surface-container-lowest px-4 py-16 md:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto max-w-7xl rounded-sm border border-surface-container-high bg-surface-container-low p-8 md:p-12">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-secondary-container">#BossMode engaged</p>
+        <h2 class="mt-3 max-w-2xl font-heading text-4xl uppercase tracking-tight text-on-surface md:text-5xl">Ready to build something real?</h2>
+        <p class="mt-5 max-w-2xl text-lg text-on-surface-variant">Let's turn your idea into a website that looks premium, loads fast, and brings in customers.</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="https://wa.me/254796625193" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-primary-container px-7 py-4 font-heading text-sm font-black uppercase tracking-wide text-on-primary shadow-[4px_4px_0px_0px_#ff7f1c]">
+            <span class="material-symbols-outlined text-lg">chat</span>
+            WhatsApp me now
+          </a>
+          <a href="mailto:kirugasamuel2@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Bossy%20Designs" class="inline-flex items-center gap-2 bg-surface-container-high px-7 py-4 font-heading text-sm font-black uppercase tracking-wide text-on-surface">
+            <span class="material-symbols-outlined text-lg">mail</span>
+            Send an email
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-surface-container-high bg-surface-container-lowest px-4 py-10 md:px-8 lg:px-12">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center gap-3">
+        <img src="image assets/screen.png" alt="Bossy Designs small icon" class="h-8 w-auto object-contain" />
+        <span class="font-heading text-xl uppercase tracking-tight text-on-surface">Bossy Designs</span>
+      </div>
+      <div class="flex flex-wrap gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">
+        <a href="#home" class="hover:text-secondary-container">Home</a>
+        <a href="#services" class="hover:text-secondary-container">Services</a>
+        <a href="#about" class="hover:text-secondary-container">About</a>
+        <a href="contact.html" class="hover:text-secondary-container">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const toggleBtn = document.getElementById('mobileMenuToggle');
+      const closeBtn = document.getElementById('mobileMenuClose');
+      const panel = document.getElementById('mobileNavPanel');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+
+      function openMenu() {
+        panel.classList.add('open');
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        panel.classList.remove('open');
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openMenu);
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+      if (backdrop) backdrop.addEventListener('click', closeMenu);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && panel && panel.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+
+      panel?.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+    })();
+  </script>
+</body>
+</html>

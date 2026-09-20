@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About | Bossy Designs — Nairobi Web Studio</title>
+    <meta name="description" content="Bossy Designs is a Nairobi-based web design and development studio founded by Sam in 2024. We build fast, mobile-first websites for serious Kenyan businesses." />
+    <style>
+        @layer base {
+            html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+            body { overscroll-behavior: none; }
+            main > :first-child { margin-top: 0 !important; }
+            main > :last-child { margin-bottom: 0 !important; }
+            section[id] { scroll-margin-top: 90px; }
+        }
+        ::-webkit-scrollbar { display: none; }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "tertiary": "#e5bdbb",
+                        "on-surface-variant": "#e5bdbb",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed": "#410007",
+                        "tertiary-container": "#7c5d5b",
+                        "surface-variant": "#353534",
+                        "on-background": "#e5e2e1",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-container-low": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "surface-tint": "#ffb3b1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface": "#131313",
+                        "primary-container": "#c8102e",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-primary": "#bf0229",
+                        "surface-dim": "#131313",
+                        "primary-fixed": "#ffdad8",
+                        "primary": "#ffb3b1",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#2c1515",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#5c3f3e",
+                        "surface-bright": "#393939",
+                        "outline-variant": "#5c403f",
+                        "secondary-container": "#ff7f1c",
+                        "on-tertiary-container": "#ffdad8",
+                        "secondary": "#ffb68b",
+                        "on-secondary-fixed": "#321200",
+                        "inverse-surface": "#e5e2e1",
+                        "on-tertiary": "#432a29",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#92001c",
+                        "background": "#131313",
+                        "on-primary": "#680011",
+                        "surface-container-highest": "#353534",
+                        "on-primary-container": "#ffdad8",
+                        "outline": "#ac8887",
+                        "on-secondary-fixed-variant": "#753400",
+                        "tertiary-fixed-dim": "#e5bdbb",
+                        "secondary-fixed": "#ffdbc8",
+                        "on-secondary": "#522300",
+                        "on-secondary-container": "#602a00"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "space-xs": "0.25rem",
+                        "space-xl": "2.5rem",
+                        "gutter": "1.5rem",
+                        "margin": "3rem",
+                        "margin-mobile": "1.25rem",
+                        "space-md": "1rem",
+                        "space-sm": "0.5rem",
+                        "space-lg": "1.5rem",
+                        "gutter-mobile": "1rem"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Montserrat"],
+                        "headline-md-mobile": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "display-hero": ["Montserrat"],
+                        "code-micro": ["JetBrains Mono"],
+                        "code-tag": ["JetBrains Mono"],
+                        "display-hero-mobile": ["Montserrat"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["56px", { lineHeight: "60px", letterSpacing: "-0.04em", fontWeight: "900" }],
+                        "headline-md-mobile": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "900" }],
+                        "body-lg": ["18px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "400" }],
+                        "headline-md": ["36px", { lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "900" }],
+                        "display-hero": ["84px", { lineHeight: "88px", letterSpacing: "-0.04em", fontWeight: "900" }],
+                        "code-micro": ["10px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "600" }],
+                        "code-tag": ["12px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "display-hero-mobile": ["44px", { lineHeight: "48px", letterSpacing: "-0.04em", fontWeight: "900" }],
+                        "headline-sm": ["22px", { lineHeight: "26px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "36px", letterSpacing: "-0.03em", fontWeight: "900" }],
+                        "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "500" }],
+                        "body-md": ["15px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <style>
+        /* URBAN AESTHETIC */
+        .urban-noise { position: relative; }
+        .urban-noise::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            pointer-events: none;
+            z-index: 2;
+            mix-blend-mode: overlay;
+        }
+        .concrete-bg {
+            background-image:
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.008) 0px, rgba(255, 255, 255, 0.008) 2px, transparent 2px, transparent 4px),
+                repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.015) 0px, rgba(0, 0, 0, 0.015) 2px, transparent 2px, transparent 4px);
+        }
+        .dot-grid {
+            background-image: radial-gradient(#ff7f1c 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.08;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+        /* Brutalist offset shadow on hover */
+        .btn-brutal {
+            transition: all 0.15s ease;
+        }
+        .btn-brutal:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0px 0px #ff7f1c;
+        }
+        .btn-brutal-sm {
+            transition: all 0.15s ease;
+        }
+        .btn-brutal-sm:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px #ff7f1c;
+        }
+        /* Mobile menu */
+        #mobile-menu {
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+        /* Nav active state */
+        .nav-link.active {
+            color: #e5e2e1;
+            background-color: #2a2a2a;
+        }
+        /* Mobile responsive typography */
+        @media (max-width: 768px) {
+            .text-display-hero { font-size: 44px !important; line-height: 48px !important; }
+            .text-headline-lg { font-size: 32px !important; line-height: 36px !important; }
+            .text-headline-md { font-size: 24px !important; line-height: 28px !important; }
+            .text-body-lg { font-size: 16px !important; line-height: 24px !important; }
+            .px-gutter { padding-left: 1rem !important; padding-right: 1rem !important; }
+            .px-margin { padding-left: 1rem !important; padding-right: 1rem !important; }
+            .py-space-xl, .pt-space-xl, .pb-space-xl { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+            .py-space-lg { padding-top: 1.25rem !important; padding-bottom: 1.25rem !important; }
+            .gap-space-xl { gap: 2rem !important; }
+            .gap-space-lg { gap: 1rem !important; }
+            .p-space-lg { padding: 1.25rem !important; }
+            .p-space-md { padding: 1rem !important; }
+        }
+        @media (max-width: 480px) {
+            .text-display-hero { font-size: 32px !important; line-height: 36px !important; }
+            .text-headline-lg { font-size: 26px !important; line-height: 30px !important; }
+            .text-headline-md { font-size: 20px !important; line-height: 24px !important; }
+            .text-headline-sm { font-size: 18px !important; line-height: 22px !important; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container urban-noise">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-high">
+        <div class="h-16 md:h-20 w-full px-4 md:px-gutter flex items-center justify-between">
+            <a href="index.html#home" class="flex items-center gap-3 md:gap-space-md group">
+                <div class="w-10 h-10 bg-primary-container flex items-center justify-center relative">
+                    <span class="material-symbols-outlined text-on-primary-container text-[22px]">bolt</span>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary-container rounded-full animate-pulse"></span>
+                </div>
+                <div class="hidden sm:flex flex-col">
+                    <span class="font-headline-sm text-headline-sm uppercase tracking-tighter text-on-surface">BOSSY<span class="text-secondary-container">DESIGNS</span></span>
+                    <span class="font-code-micro text-code-micro text-outline tracking-widest">NAIROBI // EST. 2024</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAV -->
+            <nav class="hidden xl:flex items-center gap-1 font-code-tag text-code-tag" id="main-nav">
+                <a class="nav-link px-space-md py-space-xs transition-colors text-on-surface-variant hover:text-on-surface" data-path="home" href="index.html#home">01 // HOME</a>
+                <a class="nav-link active px-space-md py-space-xs transition-colors text-on-surface bg-surface-container-high" data-path="about" href="about.html">02 // ABOUT</a>
+                <a class="nav-link px-space-md py-space-xs transition-colors text-on-surface-variant hover:text-on-surface" data-path="work" href="project.html">03 // WORK</a>
+                <a class="nav-link px-space-md py-space-xs transition-colors text-on-surface-variant hover:text-on-surface" data-path="contact" href="contact.html">04 // CONTACT</a>
+            </nav>
+
+            <div class="flex items-center gap-2 md:gap-space-md">
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1 bg-surface-container-lowest border border-surface-container-high">
+                    <span class="w-1.5 h-1.5 bg-secondary-container animate-pulse"></span>
+                    <span class="font-code-micro text-code-micro text-secondary-container uppercase">#ONLINE</span>
+                </div>
+                <a href="contact.html" class="hidden md:inline-flex bg-primary-container text-on-primary-container font-code-tag text-code-tag px-space-md py-space-sm uppercase tracking-wider btn-brutal-sm">
+                    START A PROJECT
+                </a>
+                <button id="mobile-menu-btn" class="xl:hidden w-10 h-10 flex items-center justify-center bg-surface-container-low border border-surface-container-high text-on-surface" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined" id="menu-icon">menu</span>
+                </button>
+                <div class="hidden md:flex w-8 h-8 rounded-full bg-primary items-center justify-center border border-primary-container/30">
+                    <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="xl:hidden bg-surface-container-low border-t border-surface-container-high">
+            <nav class="flex flex-col py-4 px-4 gap-2">
+                <a class="nav-link px-4 py-3 font-code-tag text-code-tag transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-path="home" href="index.html#home">01 // HOME</a>
+                <a class="nav-link active px-4 py-3 font-code-tag text-code-tag transition-colors text-on-surface bg-surface-container-high" data-path="about" href="about.html">02 // ABOUT</a>
+                <a class="nav-link px-4 py-3 font-code-tag text-code-tag transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-path="work" href="project.html">03 // WORK</a>
+                <a class="nav-link px-4 py-3 font-code-tag text-code-tag transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-path="contact" href="contact.html">04 // CONTACT</a>
+                <a href="contact.html" class="mt-2 inline-flex items-center justify-center bg-primary-container text-on-primary-container font-code-tag text-code-tag px-6 py-3 uppercase tracking-wider">
+                    START A PROJECT →
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="w-full pt-16 md:pt-20 bg-surface min-h-screen">
+        <div class="flex flex-col w-full">
+
+            <!-- TOP TICKER -->
+            <section class="w-full bg-secondary-container text-surface-container-lowest py-2 overflow-hidden select-none">
+                <div class="flex items-center gap-space-lg font-code-tag text-code-tag uppercase tracking-widest whitespace-nowrap animate-marquee">
+                    <span class="flex items-center gap-2"><span class="w-2 h-2 bg-primary-container"></span> NAIROBI BUILT</span>
+                    <span>//</span>
+                    <span>KENYAN OWNED</span>
+                    <span>//</span>
+                    <span>WORLD-CLASS CODE</span>
+                    <span>//</span>
+                    <span>M-PESA READY</span>
+                    <span>//</span>
+                    <span>FAST ON SAFARICOM</span>
+                    <span>//</span>
+                    <span>DESIGNED TO SELL</span>
+                    <span>//</span>
+                    <span>NAIROBI BUILT</span>
+                    <span>//</span>
+                    <span>KENYAN OWNED</span>
+                    <span>//</span>
+                    <span>WORLD-CLASS CODE</span>
+                    <span>//</span>
+                    <span>M-PESA READY</span>
+                    <span>//</span>
+                    <span>FAST ON SAFARICOM</span>
+                    <span>//</span>
+                    <span>DESIGNED TO SELL</span>
+                </div>
+            </section>
+
+            <!-- HERO / INTRO (id="about") -->
+            <section id="about" class="relative w-full px-4 md:px-margin pt-12 md:pt-space-xl pb-10 md:pb-space-xl overflow-hidden">
+                <div class="absolute inset-0 dot-grid pointer-events-none"></div>
+
+                <div class="max-w-7xl mx-auto flex flex-col gap-6 md:gap-space-xl relative z-10">
+                    <div class="flex flex-wrap items-center gap-2 md:gap-space-sm font-code-micro text-code-micro">
+                        <div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 border border-surface-container-high">
+                            <span class="w-2 h-2 bg-secondary-container"></span>
+                            <span class="text-secondary-container">[SYS_ABOUT_01]</span>
+                            <span class="text-outline">::</span>
+                            <span class="text-on-surface">[EST. 2024]</span>
+                            <span class="text-primary-container">[#BOSSMODE]</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-outline font-code-tag text-code-tag">
+                            <span class="text-secondary-container">GPS:</span> 1°17'S 36°49'E // NAIROBI
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-space-xl items-start">
+                        <div class="lg:col-span-8 flex flex-col gap-4 md:gap-space-md">
+                            <div class="inline-flex flex-wrap items-center gap-2 md:gap-space-xs">
+                                <span class="px-2 py-0.5 bg-primary-container text-on-primary-container font-code-micro text-code-micro uppercase tracking-widest font-bold">
+                                    THE STORY
+                                </span>
+                                <span class="text-secondary-container font-code-micro text-code-micro uppercase">
+                                    // NAIROBI // 2024
+                                </span>
+                            </div>
+                            <h1 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tighter leading-none">
+                                ABOUT BOSSY<br />
+                                <span class="text-primary-container bg-surface-container-lowest px-2 inline-block shadow-[6px_6px_0px_0px_#ff7f1c]">
+                                    DESIGNS.
+                                </span>
+                            </h1>
+                            <p class="font-body-lg text-body-lg text-tertiary max-w-2xl pt-2 md:pt-space-xs">
+                                Nairobi-built. World-class standards. Founded in 2024 to help Kenyan businesses look as serious online as they are in real life.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOUNDER SECTION (SAM) -->
+            <section class="w-full bg-surface-container-lowest border-y border-surface-container-high py-12 md:py-space-xl px-4 md:px-margin concrete-bg">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-space-xl items-center">
+
+                    <div class="lg:col-span-5 relative order-1">
+                        <div class="relative w-full h-[320px] md:h-[500px] overflow-hidden border border-surface-container-high">
+                            <img src="image assets/screen.png" alt="Sam — Founder of Bossy Designs, portrait in dark studio with neon lighting" class="w-full h-full object-cover object-center filter contrast-110" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 bg-primary-container text-on-primary-container px-4 py-2 font-code-tag text-code-tag uppercase">
+                                SAM // FOUNDER
+                            </div>
+                            <div class="absolute top-3 right-3 bg-surface-container-lowest/90 border border-secondary-container px-2 py-1 font-code-micro text-code-micro text-secondary-container">
+                                NAIROBI, KENYA
+                            </div>
+                        </div>
+                        <div class="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-secondary-container z-10 pointer-events-none"></div>
+                        <div class="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-primary-container z-10 pointer-events-none"></div>
+                    </div>
+
+                    <div class="lg:col-span-7 order-2 flex flex-col gap-4 md:gap-space-md">
+                        <div class="flex items-center gap-2">
+                            <span class="font-code-micro text-code-micro text-secondary-container uppercase tracking-widest">// MEET THE FOUNDER</span>
+                        </div>
+                        <h2 class="font-headline-md text-headline-md uppercase text-on-surface">
+                            HI, I'M SAM.
+                        </h2>
+                        <div class="flex flex-col gap-3 md:gap-space-sm font-body-md text-body-md text-tertiary">
+                            <p>
+                                I started Bossy Designs in 2024 from my setup in Nairobi. I'd been building websites for friends and small businesses for a while, and I kept seeing the same problem: Kenyan businesses settling for slow, ugly, template websites that don't do anything for them.
+                            </p>
+                            <p>
+                                I started Bossy Designs to fix that. Every site I build is fast on Safaricom, works on mobile first, and is designed to actually bring in customers — not just look nice.
+                            </p>
+                            <p>
+                                I'm not a big agency. I'm one person who cares about the details. When you work with Bossy Designs, you work with me directly. No middlemen. No handoffs. Just real work, done properly.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-space-sm pt-4 md:pt-space-md border-t border-surface-container-high">
+                            <div>
+                                <span class="font-code-micro text-code-micro text-outline uppercase block">BACKGROUND</span>
+                                <span class="font-code-tag text-code-tag text-on-surface">Self-Taught Developer</span>
+                            </div>
+                            <div>
+                                <span class="font-code-micro text-code-micro text-outline uppercase block">BASE</span>
+                                <span class="font-code-tag text-code-tag text-on-surface">Nairobi // Working Globally</span>
+                            </div>
+                            <div>
+                                <span class="font-code-micro text-code-micro text-outline uppercase block">CAPACITY</span>
+                                <span class="font-code-tag text-code-tag text-secondary-container font-bold">3 Clients / Month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- WHAT WE STAND FOR -->
+            <section class="w-full px-4 md:px-margin py-12 md:py-space-xl bg-surface">
+                <div class="max-w-7xl mx-auto flex flex-col gap-8 md:gap-space-xl">
+
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-space-md border-b border-surface-container-high pb-4 md:pb-space-md">
+                        <div>
+                            <div class="flex items-center gap-2 md:gap-space-xs font-code-micro text-code-micro text-secondary-container uppercase tracking-widest">
+                                <span>// WHAT WE STAND FOR</span>
+                                <span class="h-px w-8 bg-secondary-container"></span>
+                            </div>
+                            <h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mt-1">
+                                OUR PRINCIPLES
+                            </h2>
+                        </div>
+                        <span class="font-code-tag text-code-tag text-outline">REF: [PRINCIPLES_2024]</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-space-md">
+
+                        <div class="bg-surface-container p-6 md:p-space-lg border border-surface-container-high hover:border-primary-container transition-colors group">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-headline-md text-headline-md text-primary-container">01</span>
+                                <span class="font-code-micro text-code-micro text-secondary-container bg-surface-container-lowest px-2 py-0.5 border border-surface-container-high">#NO_TEMPLATES</span>
+                            </div>
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-3">
+                                NO TEMPLATES
+                            </h3>
+                            <p class="font-body-md text-body-md text-tertiary">
+                                Every site is built from scratch. No copied themes. No recycled designs. Your business deserves its own look — not someone else's.
+                            </p>
+                        </div>
+
+                        <div class="bg-surface-container p-6 md:p-space-lg border border-surface-container-high hover:border-secondary-container transition-colors group">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-headline-md text-headline-md text-secondary-container">02</span>
+                                <span class="font-code-micro text-code-micro text-secondary-container bg-surface-container-lowest px-2 py-0.5 border border-surface-container-high">#FAST_BY_DEFAULT</span>
+                            </div>
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-3">
+                                FAST BY DEFAULT
+                            </h3>
+                            <p class="font-body-md text-body-md text-tertiary">
+                                Optimized for Kenyan networks. Loads in under a second — even on mobile data. Because slow sites lose customers.
+                            </p>
+                        </div>
+
+                        <div class="bg-surface-container p-6 md:p-space-lg border border-surface-container-high hover:border-primary-container transition-colors group">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-headline-md text-headline-md text-primary-container">03</span>
+                                <span class="font-code-micro text-code-micro text-secondary-container bg-surface-container-lowest px-2 py-0.5 border border-surface-container-high">#REAL_RESULTS</span>
+                            </div>
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-3">
+                                REAL RESULTS
+                            </h3>
+                            <p class="font-body-md text-body-md text-tertiary">
+                                Built to convert visitors into customers. Not just look pretty. Your website should pay for itself.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- KENYAN CONTEXT -->
+            <section class="w-full px-4 md:px-margin py-12 md:py-space-xl bg-surface-container-lowest border-y border-surface-container-high">
+                <div class="max-w-7xl mx-auto flex flex-col gap-8 md:gap-space-xl">
+
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-space-md">
+                        <div>
+                            <div class="flex items-center gap-2 font-code-micro text-code-micro text-secondary-container uppercase tracking-widest">
+                                <span>// WHY THIS MATTERS</span>
+                                <span class="h-px w-8 bg-secondary-container"></span>
+                            </div>
+                            <h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mt-1">
+                                THE KENYAN REALITY
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="border border-secondary-container bg-surface-container-low p-6 md:p-space-lg relative">
+                        <div class="absolute -top-2 left-4 bg-secondary-container text-surface-container-lowest font-code-micro text-code-micro px-2 py-0.5 font-bold">
+                            REAL TALK
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface mb-6">
+                            Kenyan businesses compete with global brands every day. Your website is the first thing customers see. If it loads slowly, looks outdated, or doesn't work on mobile — you're losing money. We build sites that close that gap.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-space-md pt-4 md:pt-space-md border-t border-surface-container-high">
+                            <div>
+                                <span class="font-headline-md text-headline-md text-primary-container block">80%+</span>
+                                <span class="font-code-micro text-code-micro text-outline uppercase">Kenyan Traffic Is Mobile</span>
+                            </div>
+                            <div>
+                                <span class="font-headline-md text-headline-md text-primary-container block">3 SEC</span>
+                                <span class="font-code-micro text-code-micro text-outline uppercase">Before A Visitor Leaves</span>
+                            </div>
+                            <div>
+                                <span class="font-headline-md text-headline-md text-primary-container block">FASTER</span>
+                                <span class="font-code-micro text-code-micro text-outline uppercase">Sites Rank Higher On Google</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="w-full px-4 md:px-margin py-12 md:py-space-xl bg-surface relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-5xl mx-auto bg-surface-container-low border-2 border-primary-container p-6 md:p-space-xl relative z-10 shadow-[8px_8px_0px_0px_#ff7f1c]">
+                    <div class="flex flex-col gap-4 md:gap-space-lg">
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container-high pb-3 md:pb-space-sm font-code-micro text-code-micro">
+                            <div class="flex items-center gap-2 text-secondary-container">
+                                <span class="w-2 h-2 bg-secondary-container animate-ping"></span>
+                                <span>INTAKE STATUS: OPEN</span>
+                            </div>
+                            <span class="text-primary-container font-bold">2024 CYCLE</span>
+                        </div>
+
+                        <div>
+                            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight">
+                                READY TO WORK <span class="text-primary-container">WITH US?</span>
+                            </h2>
+                            <p class="font-body-lg text-body-lg text-tertiary max-w-2xl mt-3">
+                                If you've got a project in mind, get in touch. I reply personally — usually within a few hours.
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3 md:gap-space-md pt-2 md:pt-space-xs">
+                            <a href="contact.html" class="btn-brutal bg-primary-container text-on-primary-container font-code-tag text-code-tag px-6 md:px-8 py-3 md:py-4 uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <span>START A PROJECT</span>
+                                <span class="material-symbols-outlined text-[18px]">bolt</span>
+                            </a>
+                            <a href="project.html" class="bg-surface-container-low text-on-surface font-code-tag text-code-tag px-6 md:px-8 py-3 md:py-4 uppercase tracking-wider border border-surface-container-high hover:border-secondary-container hover:text-secondary-container transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <span class="text-secondary-container">[</span>
+                                <span>SEE OUR WORK</span>
+                                <span class="text-secondary-container">]</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-surface-container-lowest border-t border-surface-container-high">
+        <div class="bg-secondary-container text-surface-container-lowest overflow-hidden py-2 border-b border-surface-container-high">
+            <div class="whitespace-nowrap flex items-center gap-space-lg font-code-tag text-code-tag tracking-widest animate-marquee">
+                <span class="flex items-center gap-space-sm">
+                    WE DON'T BUILD WEBSITES. WE BUILD DIGITAL EMPIRES.
+                    <span class="font-code-micro text-code-micro">//</span>
+                    NAIROBI BUILT
+                    <span class="font-code-micro text-code-micro">//</span>
+                    KENYAN OWNED
+                    <span class="font-code-micro text-code-micro">//</span>
+                    WORLD-CLASS CODE
+                </span>
+                <span class="flex items-center gap-space-sm">
+                    WE DON'T BUILD WEBSITES. WE BUILD DIGITAL EMPIRES.
+                    <span class="font-code-micro text-code-micro">//</span>
+                    NAIROBI BUILT
+                    <span class="font-code-micro text-code-micro">//</span>
+                    KENYAN OWNED
+                    <span class="font-code-micro text-code-micro">//</span>
+                    WORLD-CLASS CODE
+                </span>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-gutter py-8 md:py-space-xl grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-space-xl">
+
+            <div class="md:col-span-5 flex flex-col justify-between gap-6">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="font-code-micro text-code-micro text-secondary-container uppercase">#STREET_CODE // GRID-00</span>
+                        <span class="h-px w-12 bg-surface-container-high"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-primary-container flex items-center justify-center">
+                            <span class="material-symbols-outlined text-on-primary-container text-[22px]">bolt</span>
+                        </div>
+                        <span class="font-headline-sm text-headline-sm uppercase tracking-tighter text-on-surface">BOSSY<span class="text-secondary-container">DESIGNS</span></span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+                        Fast, custom websites for serious Kenyan businesses. Built by Sam in Nairobi, working with clients globally.
+                    </p>
+                </div>
+                <div>
+                    <span class="font-code-micro text-code-micro text-on-surface-variant block">LOCATION</span>
+                    <span class="font-code-tag text-code-tag text-on-surface">NAIROBI, KENYA [1°17'S 36°49'E]</span>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 flex flex-col gap-4">
+                <span class="font-code-micro text-code-micro text-secondary-container uppercase">// GET IN TOUCH</span>
+                <p class="font-headline-sm text-headline-sm text-on-surface">LET'S BUILD SOMETHING.</p>
+                <div class="flex flex-col gap-2">
+                    <a href="mailto:kirugasamuel2@gmail.com" class="flex items-center gap-2 font-code-tag text-code-tag text-on-surface hover:text-secondary-container transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">mail</span>
+                        <span>kirugasamuel2@gmail.com</span>
+                    </a>
+                    <a href="https://wa.me/254796625193" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 font-code-tag text-code-tag text-on-surface hover:text-secondary-container transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">chat</span>
+                        <span>+254 796 625 193</span>
+                    </a>
+                </div>
+                <span class="font-code-micro text-code-micro text-on-surface-variant">RESPONSE TIME: WITHIN 4 HOURS</span>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col justify-between gap-4">
+                <div class="space-y-3">
+                    <span class="font-code-micro text-code-micro text-secondary-container uppercase">// LINKS</span>
+                    <ul class="space-y-2 font-code-tag text-code-tag">
+                        <li class="border-b border-surface-container-high pb-2"><a class="text-on-surface-variant hover:text-secondary-container transition-colors flex items-center justify-between" href="https://github.com/bossman892" target="_blank" rel="noopener noreferrer">GITHUB <span>[01]</span></a></li>
+                        <li class="border-b border-surface-container-high pb-2"><a class="text-on-surface-variant hover:text-secondary-container transition-colors flex items-center justify-between" href="https://www.linkedin.com/in/samwel-kiruga-733b9a311/" target="_blank" rel="noopener noreferrer">LINKEDIN <span>[02]</span></a></li>
+                        <li class="border-b border-surface-container-high pb-2"><a class="text-on-surface-variant hover:text-secondary-container transition-colors flex items-center justify-between" href="https://www.instagram.com/boss.ydesigns" target="_blank" rel="noopener noreferrer">INSTAGRAM <span>[03]</span></a></li>
+                        <li class="pb-2"><a class="text-on-surface-variant hover:text-secondary-container transition-colors flex items-center justify-between" href="contact.html">CONTACT <span>[04]</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="font-code-micro text-code-micro text-on-surface-variant">© 2024 BOSSY DESIGNS. BUILT IN NAIROBI.</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            // ===== MOBILE MENU TOGGLE =====
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('open');
+                    menuIcon.textContent = mobileMenu.classList.contains('open') ? 'close' : 'menu';
+                });
+            }
+
+            // ===== CLOSE MOBILE MENU ON OUTSIDE CLICK =====
+            document.addEventListener('click', function (e) {
+                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        mobileMenu.classList.remove('open');
+                        if (menuIcon) menuIcon.textContent = 'menu';
+                    }
+                }
+            });
+
+            // ===== CLOSE MOBILE MENU ON RESIZE TO DESKTOP =====
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 1280 && mobileMenu && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    if (menuIcon) menuIcon.textContent = 'menu';
+                }
+            });
+
+            // ===== CLOSE MOBILE MENU ON LINK CLICK =====
+            const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    if (mobileMenu && mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                        if (menuIcon) menuIcon.textContent = 'menu';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="analytics.js" defer></script>
+
+</body>
+<script src="main.js" defer></script>
+</html>

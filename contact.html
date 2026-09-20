@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_standard" name="shell-type">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+
+    /* Smooth mobile nav */
+    .mobile-nav-panel {
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .mobile-nav-panel.open {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-nav-backdrop {
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .mobile-nav-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 24s linear infinite;
+    }
+
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary { list-style: none; }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#393939",
+            "on-tertiary-fixed": "#2c1515",
+            "background": "#131313",
+            "primary-fixed": "#ffdad8",
+            "surface-container": "#201f1f",
+            "surface-container-high": "#2a2a2a",
+            "surface-variant": "#353534",
+            "on-tertiary-container": "#ffdad8",
+            "secondary-fixed": "#ffdbc8",
+            "on-secondary": "#522300",
+            "on-secondary-container": "#602a00",
+            "primary": "#ffb3b1",
+            "tertiary": "#e5bdbb",
+            "on-primary-container": "#ffdad8",
+            "tertiary-fixed-dim": "#e5bdbb",
+            "inverse-primary": "#bf0229",
+            "tertiary-fixed": "#ffdad8",
+            "surface-tint": "#ffb3b1",
+            "on-background": "#e5e2e1",
+            "on-primary-fixed-variant": "#92001c",
+            "inverse-surface": "#e5e2e1",
+            "on-error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#5c3f3e",
+            "outline": "#ac8887",
+            "on-error": "#690005",
+            "secondary-fixed-dim": "#ffb68b",
+            "on-surface": "#e5e2e1",
+            "error-container": "#93000a",
+            "surface-container-highest": "#353534",
+            "on-secondary-fixed-variant": "#753400",
+            "on-secondary-fixed": "#321200",
+            "on-primary": "#680011",
+            "on-primary-fixed": "#410007",
+            "primary-container": "#c8102e",
+            "surface": "#131313",
+            "error": "#ffb4ab",
+            "on-tertiary": "#432a29",
+            "surface-dim": "#131313",
+            "inverse-on-surface": "#313030",
+            "surface-container-lowest": "#0e0e0e",
+            "primary-fixed-dim": "#ffb3b1",
+            "secondary-container": "#ff7f1c",
+            "outline-variant": "#5c403f",
+            "surface-container-low": "#1c1b1b",
+            "secondary": "#ffb68b",
+            "tertiary-container": "#7c5d5b",
+            "on-surface-variant": "#e5bdbb"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            "margin": "3rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "space-xl": "2.5rem",
+            "gutter-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "headline-md-mobile": ["Montserrat"],
+            "display-hero-mobile": ["Montserrat"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Montserrat"],
+            "code-micro": ["JetBrains Mono"],
+            "code-tag": ["JetBrains Mono"],
+            "headline-lg": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "headline-lg-mobile": ["Montserrat"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "display-hero": ["Montserrat"]
+          },
+          fontSize: {
+            "headline-md-mobile": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "900" }],
+            "display-hero-mobile": ["44px", { lineHeight: "48px", letterSpacing: "-0.04em", fontWeight: "900" }],
+            "body-md": ["15px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }],
+            "headline-sm": ["22px", { lineHeight: "26px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "code-micro": ["10px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "600" }],
+            "code-tag": ["12px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "700" }],
+            "headline-lg": ["56px", { lineHeight: "60px", letterSpacing: "-0.04em", fontWeight: "900" }],
+            "headline-md": ["36px", { lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "900" }],
+            "headline-lg-mobile": ["32px", { lineHeight: "36px", letterSpacing: "-0.03em", fontWeight: "900" }],
+            "body-lg": ["18px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "400" }],
+            "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "500" }],
+            "display-hero": ["84px", { lineHeight: "88px", letterSpacing: "-0.04em", fontWeight: "900" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+
+  <!-- ========== HEADER ========== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-high">
+    <div class="h-20 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md">
+      <!-- Logo -->
+      <div class="flex items-center gap-space-md shrink-0">
+        <a href="index.html" class="flex items-center gap-space-md">
+          <img alt="Bossy Designs logo" class="h-8 w-auto object-contain" src="image assets/Bold BOSSY Logo with Energetic Orange Detail.png">
+          <div class="flex flex-col">
+            <span class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-tighter">BOSSY DESIGN</span>
+            <span class="font-code-micro text-code-micro text-secondary-container uppercase">NRB // ARCHITECTURAL_LAB</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-links hidden md:flex items-center gap-space-xs p-space-xs bg-surface-container-lowest">
+        <a class="px-space-md py-space-sm font-code-tag text-code-tag tracking-wider uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="index.html">HOME</a>
+        <a class="px-space-md py-space-sm font-code-tag text-code-tag tracking-wider uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="project.html">WORK</a>
+        <a class="px-space-md py-space-sm font-code-tag text-code-tag tracking-wider uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="index.html#services">SERVICES</a>
+        <a class="px-space-md py-space-sm font-code-tag text-code-tag tracking-wider uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="index.html#about">ABOUT</a>
+        <a aria-current="page" class="active px-space-md py-space-sm font-code-tag text-code-tag tracking-wider uppercase transition-colors text-on-surface bg-surface-container-high font-bold" href="contact.html">CONTACT</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-space-md shrink-0">
+        <a class="hidden sm:inline-flex items-center justify-center px-space-md py-space-sm bg-primary-container text-on-primary font-headline-sm text-body-sm uppercase tracking-tight hover:bg-secondary-container hover:text-on-secondary transition-colors" href="#contact-modules">START A PROJECT</a>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+        <!-- Mobile toggle -->
+        <button id="mobileMenuToggle" class="md:hidden flex items-center justify-center w-10 h-10 border border-surface-container-high bg-surface-container-lowest text-on-surface hover:text-secondary-container transition-colors" aria-label="Toggle menu">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MOBILE NAV OVERLAY ========== -->
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] md:hidden"></div>
+  <div id="mobileNavPanel" class="mobile-nav-panel fixed top-0 right-0 h-full w-[280px] max-w-[85vw] bg-surface-container-lowest border-l border-surface-container-high z-[70] p-6 flex flex-col md:hidden">
+    <div class="flex items-center justify-between mb-8">
+      <span class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-tighter">MENU</span>
+      <button id="mobileMenuClose" class="w-10 h-10 flex items-center justify-center border border-surface-container-high text-on-surface hover:text-secondary-container transition-colors" aria-label="Close menu">
+        <span class="material-symbols-outlined text-[24px]">close</span>
+      </button>
+    </div>
+    <nav class="nav-links flex flex-col gap-1">
+      <a class="px-4 py-3 font-code-tag text-code-tag uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors tracking-wider" href="index.html">HOME</a>
+      <a class="px-4 py-3 font-code-tag text-code-tag uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors tracking-wider" href="project.html">WORK</a>
+      <a class="px-4 py-3 font-code-tag text-code-tag uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors tracking-wider" href="index.html#services">SERVICES</a>
+      <a class="px-4 py-3 font-code-tag text-code-tag uppercase text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors tracking-wider" href="index.html#about">ABOUT</a>
+      <a class="active px-4 py-3 font-code-tag text-code-tag uppercase text-on-surface bg-surface-container-high font-bold tracking-wider" href="contact.html">CONTACT</a>
+    </nav>
+    <div class="mt-auto pt-6 border-t border-surface-container-high">
+      <a class="flex items-center justify-center w-full bg-primary-container text-on-primary font-headline-sm text-body-sm font-black uppercase tracking-wider px-6 py-3 hover:bg-secondary-container hover:text-on-secondary transition-all" href="#contact-modules">START A PROJECT</a>
+      <p class="font-code-micro text-code-micro text-on-surface-variant tracking-wider uppercase text-center mt-4">© 2025 BOSSY DESIGNS</p>
+    </div>
+  </div>
+
+  <!-- ========== MAIN ========== -->
+  <main class="w-full pt-20 bg-surface min-h-screen">
+    <div class="flex flex-col w-full">
+
+      <!-- TOP TICKER STRIP -->
+      <section class="w-full bg-secondary-container text-on-secondary py-space-xs overflow-hidden select-none">
+        <div class="flex items-center gap-space-lg whitespace-nowrap font-code-tag text-code-tag uppercase tracking-widest animate-pulse">
+          <span class="flex items-center gap-space-xs font-bold">
+            <span class="w-2 h-2 bg-on-secondary"></span>
+            DIRECT DISPATCH PROTOCOL // NAIROBI_NODE [254]
+          </span>
+          <span>///</span>
+          <span>STATUS: DISPATCH_ACTIVE // 24/7 PRIORITY ROUTING</span>
+          <span>///</span>
+          <span>AVERAGE RESPONSE LATENCY: &lt; 15 MIN (WHATSAPP) / &lt; 4 HRS (INBOX)</span>
+          <span>///</span>
+          <span>FOUNDER DIRECT LINE: ACTIVE</span>
+        </div>
+      </section>
+
+      <!-- HERO SECTION -->
+      <section class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin pt-space-xl pb-space-lg">
+        <div class="flex flex-col gap-space-md">
+          <div class="flex flex-wrap items-center justify-between gap-space-sm">
+            <div class="flex items-center gap-space-xs">
+              <span class="bg-surface-container-lowest px-space-sm py-space-xs text-secondary-container font-code-micro text-code-micro uppercase tracking-widest">#SYS_CONTACT_01</span>
+              <span class="font-code-tag text-code-tag text-on-surface-variant uppercase">// DIRECT DISPATCH</span>
+            </div>
+            <div class="flex items-center gap-space-sm font-code-micro text-code-micro text-outline bg-surface-container-lowest px-space-sm py-space-xs">
+              <span class="w-1.5 h-1.5 bg-secondary-container animate-ping"></span>
+              <span>NODE: NAIROBI [254] // SECURE ENCRYPTION // DIRECT LINE SAM</span>
+            </div>
+          </div>
+          <div class="mt-space-sm">
+            <h1 class="font-display-hero text-headline-lg-mobile lg:text-display-hero uppercase text-on-surface tracking-tight">
+              LET'S BUILD <span class="text-secondary-container underline decoration-primary-container decoration-4 underline-offset-8">SOMETHING.</span>
+            </h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-space-md">
+              Tell us about your project. We reply personally — usually within a few hours. No middlemen, no bureaucratic agency layers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIMARY TRANSMISSION MODULES -->
+      <section id="contact-modules" class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-md">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+
+          <!-- LEFT: WHATSAPP CARD -->
+          <div class="lg:col-span-7 bg-surface-container-low p-space-md lg:p-space-lg flex flex-col justify-between relative shadow-xl">
+            <div class="absolute top-0 right-0 p-space-xs font-code-micro text-code-micro text-secondary-container bg-surface-container-lowest select-none">
+              + PRIORITY_CHANNEL // DIRECT
+            </div>
+            <div>
+              <div class="flex items-start justify-between gap-space-sm pb-space-md">
+                <div class="flex items-center gap-space-md">
+                  <div class="w-12 h-12 bg-surface-container-lowest flex items-center justify-center p-space-xs shrink-0">
+                    <img alt="WhatsApp Icon" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo_BT36R42IopPgOrYTV4zSulaYkRlpDagEhSvOsQyaKZWpWs9btWS1mZBFTEBPXY_S50wqST1I11bOFU3-iwVJ2trRIChJlqYZKM0sxn1yU-TthTekFMYm7nh_fWj0mxhVQvRRTT4qSs9xolNkv9XIIv7tZ8vP85yy_cphURGTOenI2WPkjWoujztTYiqmMcxEIsivCuI0GlFE1E7pC5hWAyhcLS7AODFMPEPmvXzTVV3GUGnalkGnT1Zinn7Bn1ZUQ">
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-xs flex-wrap">
+                      <span class="font-headline-md text-headline-sm uppercase text-on-surface">WHATSAPP</span>
+                      <span class="inline-flex items-center gap-1 px-space-xs py-[2px] bg-[#004d26] text-[#25D366] font-code-micro text-code-micro uppercase">
+                        <span class="w-1.5 h-1.5 bg-[#25D366] inline-block animate-pulse"></span>
+                        FASTEST RESPONSE
+                      </span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                      Best for quick questions and getting an immediate turnaround quote.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-surface-container-lowest p-space-md mt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                <div>
+                  <span class="font-code-micro text-code-micro text-outline uppercase block">DIRECT ENCRYPTED LINE</span>
+                  <a class="font-code-tag text-headline-sm text-[#25D366] hover:text-on-surface transition-colors tracking-tight" href="https://wa.me/254796625193" rel="noopener noreferrer" target="_blank">
+                    +254 796 625 193
+                  </a>
+                </div>
+                <a class="self-start sm:self-auto px-space-sm py-space-xs bg-surface-container-high text-on-surface hover:bg-surface-bright font-code-micro text-code-micro uppercase flex items-center gap-1 transition-colors" href="https://wa.me/254796625193" rel="noopener noreferrer" target="_blank">
+                  <span>OPEN APP</span>
+                  <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+                </a>
+              </div>
+
+              <form class="mt-space-lg flex flex-col gap-space-md" id="whatsappForm">
+                <div class="flex flex-col gap-space-xs">
+                  <label class="font-code-tag text-code-tag text-on-surface-variant uppercase">// SELECT CAPABILITY REQUIRED</label>
+                  <div class="grid grid-cols-2 gap-space-xs">
+                    <label class="cursor-pointer group">
+                      <input checked class="peer sr-only" name="service" type="radio" value="Web Design">
+                      <div class="p-space-sm bg-surface-container-lowest text-center font-code-micro text-code-micro uppercase text-on-surface-variant border border-transparent peer-checked:bg-[#25D366] peer-checked:text-[#003816] peer-checked:font-bold peer-checked:border-[#25D366] group-hover:border-surface-variant transition-all select-none">WEB DESIGN</div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input class="peer sr-only" name="service" type="radio" value="Graphic Design">
+                      <div class="p-space-sm bg-surface-container-lowest text-center font-code-micro text-code-micro uppercase text-on-surface-variant border border-transparent peer-checked:bg-[#25D366] peer-checked:text-[#003816] peer-checked:font-bold peer-checked:border-[#25D366] group-hover:border-surface-variant transition-all select-none">GRAPHIC DESIGN</div>
+                    </label>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-space-xs">
+                  <label class="font-code-tag text-code-tag text-on-surface-variant uppercase" for="clientName">// YOUR IDENTITY / ORG NAME</label>
+                  <input class="w-full bg-surface-container-lowest px-space-md py-space-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container border border-transparent focus:border-outline-variant transition-all" id="clientName" placeholder="e.g. Alex Kimani (Nairobi Tech Ltd)" type="text">
+                </div>
+                <div class="pt-space-xs">
+                  <button class="w-full py-space-md px-space-lg bg-[#25D366] hover:bg-[#1ebd59] text-[#003816] font-headline-sm text-body-md uppercase tracking-wide flex items-center justify-center gap-space-sm transition-all shadow-md active:translate-y-0.5 cursor-pointer" type="submit">
+                    <img alt="WhatsApp" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUWFpoPggtka1Oy8R2c8w0TDhpPid_nmS5CRP6hPjq_JA85GYsc8YTu4Y_opMq8W734yvseycQSZqlqotxcB2Pwc49Edq278Fqg8LDIkmShF-xS15kGTXWEQQ27uuEwCNxURfktbFf7B77erNkIzCJ82JwywG2Visn2K9Q0VtxXbruJ-0xXUsCtRDXTLWgRlCqaqMopseb_WJqMjakBM0Ox7DtW-nsqjCU8GpdRdSz-jYxgi3L7IWVNvz2BNFvKfQzcQ">
+                    <span>[ CHAT ON WHATSAPP ]</span>
+                    <span class="material-symbols-outlined text-[18px]">bolt</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="mt-space-md pt-space-sm bg-surface-container-lowest px-space-sm py-space-xs flex items-center justify-between text-outline font-code-micro text-code-micro">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[13px] text-secondary-container">schedule</span>
+                AVG LATENCY: &lt; 15 MIN DURING EAT WORK HOURS
+              </span>
+              <span class="text-secondary-container uppercase">ONLINE</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: EMAIL CARD -->
+          <div class="lg:col-span-5 bg-surface-container-low p-space-md lg:p-space-lg flex flex-col justify-between relative shadow-lg">
+            <div class="absolute top-0 right-0 p-space-xs font-code-micro text-code-micro text-primary bg-surface-container-lowest select-none">
+              SYS-INBOX: // FORMAL
+            </div>
+            <div>
+              <div class="flex items-start justify-between gap-space-sm pb-space-md">
+                <div class="flex items-center gap-space-md">
+                  <div class="w-12 h-12 bg-surface-container-lowest flex items-center justify-center p-space-xs shrink-0 text-primary-container">
+                    <span class="material-symbols-outlined text-[28px] text-primary">mail</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-xs flex-wrap">
+                      <span class="font-headline-md text-headline-sm uppercase text-on-surface">EMAIL</span>
+                      <span class="px-space-xs py-[2px] bg-surface-container-highest text-tertiary font-code-micro text-code-micro uppercase">
+                        DETAILED BRIEFS
+                      </span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                      Best for comprehensive RFPs, specs, attachments, and contracts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-surface-container-lowest p-space-md mt-space-sm">
+                <span class="font-code-micro text-code-micro text-outline uppercase block">PRIMARY INBOX</span>
+                <a class="font-code-tag text-body-lg text-primary hover:underline transition-all break-all" href="mailto:kirugasamuel2@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Bossy%20Designs">
+                  kirugasamuel2@gmail.com
+                </a>
+              </div>
+
+              <form class="mt-space-lg flex flex-col gap-space-md" id="emailForm">
+                <div class="flex flex-col gap-space-xs">
+                  <label class="font-code-tag text-code-tag text-on-surface-variant uppercase">// SELECT CAPABILITY REQUIRED</label>
+                  <div class="grid grid-cols-2 gap-space-xs">
+                    <label class="cursor-pointer group">
+                      <input checked class="peer sr-only" name="emailService" type="radio" value="Web Design">
+                      <div class="p-space-sm bg-surface-container-lowest text-center font-code-micro text-code-micro uppercase text-on-surface-variant border border-transparent peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:font-bold peer-checked:border-primary-container group-hover:border-surface-variant transition-all select-none">WEB DESIGN</div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input class="peer sr-only" name="emailService" type="radio" value="Graphic Design">
+                      <div class="p-space-sm bg-surface-container-lowest text-center font-code-micro text-code-micro uppercase text-on-surface-variant border border-transparent peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:font-bold peer-checked:border-primary-container group-hover:border-surface-variant transition-all select-none">GRAPHIC DESIGN</div>
+                    </label>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-space-xs">
+                  <label class="font-code-tag text-code-tag text-on-surface-variant uppercase" for="emailClientName">// YOUR IDENTITY / ORG NAME</label>
+                  <input class="w-full bg-surface-container-lowest px-space-md py-space-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container border border-transparent focus:border-outline-variant transition-all" id="emailClientName" placeholder="e.g. Alex Kimani (Nairobi Tech Ltd)" type="text">
+                </div>
+                <div class="pt-space-xs">
+                  <button class="w-full py-space-md px-space-lg bg-primary-container hover:bg-secondary-container text-on-primary hover:text-on-secondary font-headline-sm text-body-md uppercase tracking-wide flex items-center justify-center gap-space-sm transition-all shadow-md active:translate-y-0.5 cursor-pointer" type="submit">
+                    <span>[ SEND AN EMAIL ]</span>
+                    <span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="mt-space-md pt-space-sm bg-surface-container-lowest px-space-sm py-space-xs flex items-center justify-between text-outline font-code-micro text-code-micro">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[13px] text-primary">schedule</span>
+                AVG LATENCY: &lt; 4 HOURS
+              </span>
+              <span class="text-primary uppercase">ACTIVE INBOX</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK INFO ROW -->
+      <section class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+
+          <div class="bg-surface-container-low p-space-md flex flex-col justify-between gap-space-md">
+            <div class="flex items-center justify-between">
+              <span class="font-code-micro text-code-micro text-secondary-container uppercase">// 01 RESPONSE TIME</span>
+              <span class="material-symbols-outlined text-secondary-container text-[20px]">timer</span>
+            </div>
+            <div>
+              <span class="font-headline-sm text-headline-sm text-on-surface uppercase block">Usually &lt; 4 Hours</span>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Direct communication with founder Sam. No account executives, account handlers, or automated support desks.</p>
+            </div>
+            <div class="bg-surface-container-lowest px-space-sm py-space-xs text-outline font-code-micro text-code-micro">REAL-TIME ROUTING ENABLED</div>
+          </div>
+
+          <div class="bg-surface-container-low p-space-md flex flex-col justify-between gap-space-md">
+            <div class="flex items-center justify-between">
+              <span class="font-code-micro text-code-micro text-primary uppercase">// 02 LOCATION</span>
+              <span class="material-symbols-outlined text-primary text-[20px]">public</span>
+            </div>
+            <div>
+              <span class="font-headline-sm text-headline-sm text-on-surface uppercase block">Nairobi, Kenya</span>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Nairobi Timezone (EAT / UTC+3). Operating seamlessly across East Africa, Europe, the UK, and North America.</p>
+            </div>
+            <div class="bg-surface-container-lowest px-space-sm py-space-xs text-outline font-code-micro text-code-micro">COORDINATES: -1.2921° S, 36.8219° E</div>
+          </div>
+
+          <div class="bg-surface-container-low p-space-md flex flex-col justify-between gap-space-md">
+            <div class="flex items-center justify-between">
+              <span class="font-code-micro text-code-micro text-secondary-container uppercase">// 03 AVAILABILITY</span>
+              <span class="material-symbols-outlined text-secondary-container text-[20px]">dataset</span>
+            </div>
+            <div>
+              <span class="font-headline-sm text-headline-sm text-on-surface uppercase block">3 Clients / Mo</span>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Strict quality over volume policy. We cap simultaneous active builds to maintain unmatched engineering precision.</p>
+            </div>
+            <div class="bg-surface-container-lowest px-space-sm py-space-xs text-secondary-container font-code-micro text-code-micro flex items-center justify-between">
+              <span>Q2 2025 INTAKE</span>
+              <span class="font-bold">STATUS: OPEN</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ SECTION -->
+      <section class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-lg">
+        <div class="flex flex-col gap-space-md">
+          <div class="flex flex-col gap-space-xs">
+            <span class="font-code-micro text-code-micro text-secondary-container uppercase tracking-wider">// COMMON QUESTIONS</span>
+            <h2 class="font-headline-lg text-headline-md uppercase text-on-surface">BEFORE YOU ASK</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Straight answers to common questions on timelines, pricing, and Kenyan settlement protocols.</p>
+          </div>
+
+          <div class="mt-space-md flex flex-col gap-space-xs">
+            <details class="group bg-surface-container-low p-space-md open:bg-surface-container transition-all">
+              <summary class="flex items-center justify-between cursor-pointer select-none">
+                <div class="flex items-center gap-space-md">
+                  <span class="font-code-tag text-code-tag text-secondary-container">01</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface uppercase">How much does a website cost?</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="pt-space-md text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest mt-space-sm">
+                <p>Depends entirely on technical complexity. A high-converting single-page landing site starts from <strong class="text-on-surface">KES 25,000</strong>. Full web applications with bespoke backend pipelines, dashboards, and custom integrations start from <strong class="text-on-surface">KES 80,000</strong>. Hit our WhatsApp line for an itemized quote in minutes.</p>
+              </div>
+            </details>
+
+            <details class="group bg-surface-container-low p-space-md open:bg-surface-container transition-all">
+              <summary class="flex items-center justify-between cursor-pointer select-none">
+                <div class="flex items-center gap-space-md">
+                  <span class="font-code-tag text-code-tag text-secondary-container">02</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface uppercase">How long does it take?</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="pt-space-md text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest mt-space-sm">
+                <p>Most standard corporate and brand platforms are fully architected, deployed, and tested within <strong class="text-on-surface">2 to 3 weeks</strong>. Larger platforms, bespoke web apps, and complex integrations ship in <strong class="text-on-surface">4 to 6 weeks</strong>.</p>
+              </div>
+            </details>
+
+            <details class="group bg-surface-container-low p-space-md open:bg-surface-container transition-all">
+              <summary class="flex items-center justify-between cursor-pointer select-none">
+                <div class="flex items-center gap-space-md">
+                  <span class="font-code-tag text-code-tag text-secondary-container">03</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface uppercase">Do you accept M-Pesa?</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="pt-space-md text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest mt-space-sm">
+                <p>Yes. We accept Lipa na M-Pesa Buy Goods / Till, Paybill, direct bank wire (EFT/RTGS), and international USD settlement (Wise, Stripe, Wire). Our standard milestone model is <strong class="text-on-surface">50% upfront commitment</strong> and <strong class="text-on-surface">50% on final staged delivery</strong>.</p>
+              </div>
+            </details>
+
+            <details class="group bg-surface-container-low p-space-md open:bg-surface-container transition-all">
+              <summary class="flex items-center justify-between cursor-pointer select-none">
+                <div class="flex items-center gap-space-md">
+                  <span class="font-code-tag text-code-tag text-secondary-container">04</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface uppercase">Can you integrate M-Pesa on my site?</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="pt-space-md text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest mt-space-sm">
+                <p>Yes. We build native integrations using Safaricom's <strong class="text-on-surface">Daraja 2.0 API</strong> (STK Push, C2B, B2C, and real-time webhook confirmation callbacks), delivering instantaneous checkout workflows for your Kenyan userbase.</p>
+              </div>
+            </details>
+
+            <details class="group bg-surface-container-low p-space-md open:bg-surface-container transition-all">
+              <summary class="flex items-center justify-between cursor-pointer select-none">
+                <div class="flex items-center gap-space-md">
+                  <span class="font-code-tag text-code-tag text-secondary-container">05</span>
+                  <span class="font-headline-sm text-headline-sm text-on-surface uppercase">Do you work with clients outside Kenya?</span>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="pt-space-md text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest mt-space-sm">
+                <p>Yes. Over 40% of our production workload serves international founders and distributed organizations across North America, the UK, Europe, and UAE via asynchronous sprint reporting and scheduled video standups.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOCIAL SIGNALS -->
+      <section class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-xl">
+        <div class="bg-surface-container-lowest p-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+          <div class="flex flex-col gap-space-xs">
+            <span class="font-code-micro text-code-micro text-secondary-container uppercase tracking-wider">// FIND US ELSEWHERE</span>
+            <h3 class="font-headline-md text-headline-sm uppercase text-on-surface">DIRECT NETWORK SIGNALS</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Follow active build logs, architecture prototypes, and design dispatches.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-space-sm w-full md:w-auto">
+            <a class="flex-1 md:flex-none flex items-center justify-center gap-space-sm px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors group" href="https://www.instagram.com/boss.ydesigns" rel="noopener noreferrer" target="_blank">
+              <img alt="Instagram" class="w-5 h-5 object-contain grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcbpKLwmElA2lEkYzYLdfjr4TKxtHLXxdiXPB_WD-OuzCC9Ncgv0W7fy0LdlzgrChMKyZXjZhxUHf2gVQZDy_YHWycsfEq7WgqozkT0te6N0f8z9jndlnluow0W1CL2re2CnDWofw2x0t2XJ9e54D30AK1uVGUxCbNEVnJ7XvyxB7P9mRbIemRAHC9CBHPhQVTaahyiWynjclkzKIcCBNITvLWxOvVcQd_BWJchnT3E7DHvnMNmVCl9DIf2e3lwMTh_A">
+              <span class="font-code-tag text-code-tag text-on-surface uppercase tracking-wider">INSTAGRAM</span>
+            </a>
+            <a class="flex-1 md:flex-none flex items-center justify-center gap-space-sm px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors group" href="https://www.linkedin.com/in/samwel-kiruga-733b9a311/" rel="noopener noreferrer" target="_blank">
+              <img alt="LinkedIn" class="w-5 h-5 object-contain grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDev2Nzf2Ea7ooaG9NjakoGNzgmW8QWxOkCHmvSlG492VToIWwO8ESxlGhj7VuMwc-7C73_iMKcA5TVmqFIqIK8VIqMPgfMWyGEmn1cwSrz6DJ5yENGJjtU8AvgwzUKKbvNQ9kHCop6W9kkgp8JEfNJN4BVfBfAQBdmqN3iFAfNryu9em_3ZetoLNPM-34yC4xq9CBF-Risldto4yFfU1z3QEo3g4ehpf17Jdz6XBcwlxFIClGpYnBN-TmUwPGFUQVBQ">
+              <span class="font-code-tag text-code-tag text-on-surface uppercase tracking-wider">LINKEDIN</span>
+            </a>
+            <a class="flex-1 md:flex-none flex items-center justify-center gap-space-sm px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors group" href="https://github.com/bossman892" rel="noopener noreferrer" target="_blank">
+              <img alt="GitHub" class="w-6 h-5 object-contain grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlzrkgcW97fKrCyKqS4JTTKVYQ1r7k77i5xtZmwql0kPDsv8gGFdMMCjTDxcavwhuw5bZu4xKFif7LpKKGj_5gAmae11Oa_iGLOFI_wzL90Vw8tFrAiYhon0IvuBfUPZ3Jin_2xVU9JwwZNsFuV3UyszUHqgzO1f5G85mul8IzMWdTkCcS9XLJ09S6NkZZOPXtl2xzQasTVl9gWsWOprzBpdwmX8vI-ZLI0PqOeNWue9eg-fblnLpCQC4jh5xuSUPyyQ">
+              <span class="font-code-tag text-code-tag text-on-surface uppercase tracking-wider">GITHUB</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SCRIPTS ========== -->
+      <script>
+        (function() {
+          // Mobile menu
+          const toggleBtn = document.getElementById('mobileMenuToggle');
+          const closeBtn = document.getElementById('mobileMenuClose');
+          const panel = document.getElementById('mobileNavPanel');
+          const backdrop = document.getElementById('mobileNavBackdrop');
+
+          function openMobileMenu() {
+            panel.classList.add('open');
+            backdrop.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+
+          function closeMobileMenu() {
+            panel.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+
+          if (toggleBtn) toggleBtn.addEventListener('click', openMobileMenu);
+          if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
+          if (backdrop) backdrop.addEventListener('click', closeMobileMenu);
+
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && panel && panel.classList.contains('open')) {
+              closeMobileMenu();
+            }
+          });
+
+          // Smooth scroll for anchors
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+              const targetId = this.getAttribute('href');
+              if (targetId && targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                  e.preventDefault();
+                  targetElement.scrollIntoView({ behavior: 'smooth' });
+                  closeMobileMenu();
+                }
+              }
+            });
+          });
+
+          // WhatsApp dispatch
+          const whatsappForm = document.getElementById('whatsappForm');
+          if (whatsappForm) {
+            whatsappForm.addEventListener('submit', function(e) {
+              e.preventDefault();
+              const selectedRadio = document.querySelector('input[name="service"]:checked');
+              const selectedService = selectedRadio ? selectedRadio.value : 'Web Design';
+              const nameInput = document.getElementById('clientName');
+              const name = nameInput && nameInput.value.trim() !== '' ? nameInput.value.trim() : 'a prospective client';
+              const messageText = 'Hi Sam, my name is ' + name + '. I\'m interested in ' + selectedService + ' for my project with Bossy Designs.';
+              const url = 'https://wa.me/254796625193?text=' + encodeURIComponent(messageText);
+              window.open(url, '_blank');
+            });
+          }
+
+          // Email dispatch
+          const emailForm = document.getElementById('emailForm');
+          if (emailForm) {
+            emailForm.addEventListener('submit', function(e) {
+              e.preventDefault();
+              const selectedRadio = document.querySelector('input[name="emailService"]:checked');
+              const selectedService = selectedRadio ? selectedRadio.value : 'Web Design';
+              const nameInput = document.getElementById('emailClientName');
+              const rawName = nameInput ? nameInput.value.trim() : '';
+              const name = rawName !== '' ? rawName : 'a prospective client';
+              const subject = rawName !== '' ? 'Project Inquiry: ' + selectedService + ' - ' + rawName : 'Project Inquiry: ' + selectedService + ' - Bossy Designs';
+              const body = 'Hi Sam,\n\nMy name is ' + name + '. I\'m reaching out regarding ' + selectedService + ' services for my project with Bossy Designs.\n\nLooking forward to connecting.';
+              window.location.href = 'mailto:kirugasamuel2@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            });
+          }
+        })();
+      </script>
+    </div>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="w-full bg-surface-container-lowest mt-space-xl border-t border-surface-container-high">
+    <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-xl">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg mb-space-xl">
+        <div class="md:col-span-5 flex flex-col gap-space-sm">
+          <div class="flex items-center gap-space-sm">
+            <div class="w-2 h-2 bg-secondary-container animate-pulse"></div>
+            <span class="font-code-tag text-code-tag uppercase text-secondary-container">CORE_NODE: NAIROBI [254]</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">High-throughput technical design laboratory engineered for uncompromising brands and cultural architects across Africa and global hubs.</p>
+          <div class="flex items-center gap-space-xs font-code-micro text-code-micro text-outline">
+            <span>SYS-STATUS:</span>
+            <span class="text-primary">OPTIMAL // 120 FPS</span>
+          </div>
+        </div>
+        <div class="md:col-span-3 flex flex-col gap-space-xs">
+          <span class="font-code-micro text-code-micro uppercase text-on-surface-variant tracking-wider">SURFACE_INDEX</span>
+          <div class="flex flex-col gap-space-xs pt-space-xs">
+            <a class="font-code-tag text-code-tag text-on-surface hover:text-secondary-container transition-colors uppercase" href="project.html">// 01 ARCHIVED_SYSTEMS</a>
+            <a class="font-code-tag text-code-tag text-on-surface hover:text-secondary-container transition-colors uppercase" href="index.html#services">// 02 CAPABILITIES_STATION</a>
+            <a class="font-code-tag text-code-tag text-on-surface hover:text-secondary-container transition-colors uppercase" href="index.html#about">// 03 LAB_MANIFESTO</a>
+            <a class="font-code-tag text-code-tag text-on-surface hover:text-secondary-container transition-colors uppercase" href="contact.html">// 04 SECURE_TRANSMISSION</a>
+          </div>
+        </div>
+        <div class="md:col-span-4 flex flex-col gap-space-sm">
+          <span class="font-code-micro text-code-micro uppercase text-on-surface-variant tracking-wider">NETWORK_SIGNALS</span>
+          <div class="flex items-center gap-space-sm">
+            <a aria-label="Instagram" class="p-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-center" href="https://www.instagram.com/boss.ydesigns" target="_blank" rel="noopener noreferrer">
+              <img alt="Instagram" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xe7NYvJdGf82QhNjIkMi3s0m3vpI7Zqed1WY-E4Hh9CJzh_s-az3IbV3zUsJY_6crFejr_kM7qa3GEF44J8yflVzimqtRnML1ashv0jAyRWr-jHGMRHH-7SCvEeVNrsyuCmgd5BCqSfQUbWSukYDgwObWkKnD3DB_pMJEPV0JHezke72RMXoQLWmVS9cqsTc3CcaDX2xm1YP3EyGL9ybkNn7w1qPbbPyfCg0M8DropDYXDmoD62YQmEnvdFH0HIrKs1aOUcPIO">
+            </a>
+            <a aria-label="LinkedIn" class="p-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-center" href="https://www.linkedin.com/in/samwel-kiruga-733b9a311/" target="_blank" rel="noopener noreferrer">
+              <img alt="LinkedIn" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XJA5Hu1rXiZ8dCP4cr4ATXrL0mt39n5dPf1sCTWE2X2sJ2WiI6s1r0e1t-eRWGJpuldzT_cinsJ8vXzLL7RWLLb2PSZ1UWGpVyD217_1Ldw3L2Mrtd3iq8OK1Te5y-hvQ12gL_bUv2wrZe4ekBsjAqySW7X_xoVlqcIvbuJSqdZ1_7EMSRWoQCXiYQluf-g4kY6msGuil_fwuTMNkZXm2KSGFbJIU9y-tBHNrWpE8nTrR51y5nLmZwtK7ouRkQ57vI94ZAcFIQTQ">
+            </a>
+            <a aria-label="GitHub" class="p-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-center" href="https://github.com/bossman892" target="_blank" rel="noopener noreferrer">
+              <img alt="GitHub" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VYyOD8j5-SiS6UNhIYuG45fJFnI6Rmz4r1pdkg2kngpaJBFH5ch9UrhdwHTDkMcKvsZLrvr1tWI6fcgHwnzsGxqXLKotd1G2riqlU7R6WdbyjtuffS10rAam9H5ROFOFaX-yIYNwAsoy0a4DGX6uvYIy-8uxbkucaH0Iv_fMBTnp0K9Hq8TzxRVy10_2_UVG-ivilPSnCyYHhiooiP2h0xjhtz02nxV3VZ6nqzUDl-3a7HVLfqUp6da_U8GqO1ptR1XSs0F3Dc">
+            </a>
+            <a aria-label="WhatsApp" class="p-space-sm bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-center" href="https://wa.me/254796625193" target="_blank" rel="noopener noreferrer">
+              <img alt="WhatsApp" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xg_Xc0wjqVXXkw85lGL3n3-55JvXW1ni6Q5cms3I0w2BukWV4PUo9eaEpLVEuPw9hMs_X8Uh7MI4U74QVahEjMrRKJefCv8O8U5vERQxERqzDzUM2Gg34ENpVs8W2H8evYKeQTT6CjklVxJf6Er9sgJQ0WBfhEDll_oCRgU71Kmthl-DtXjARaFmK5Xwbkq5ssI48xx2Yea9-Bqod9mZSGtCK6etEK0dr8ZCDKRgJHwdPSZ1oqpKCT1NHAPdYV2i6lHHvYhjdX">
+            </a>
+          </div>
+          <div class="mt-space-xs p-space-sm bg-surface-container-low flex items-center justify-between font-code-micro text-code-micro text-outline">
+            <span>LATENCY: 14MS</span>
+            <span>SECURE PROTOCOL V4</span>
+          </div>
+        </div>
+      </div>
+      <div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md border-t border-surface-container-high">
+        <span class="font-code-micro text-code-micro text-outline tracking-wider uppercase">© 2025 BOSSY DESIGNS // ALL RIGHTS RESERVED // NAIROBI_CITY_COUNTY</span>
+        <div class="flex items-center gap-space-lg font-code-micro text-code-micro text-outline">
+          <span>ZONE: EAT [UTC+3]</span>
+          <span>TERMINAL READY</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="analytics.js" defer></script>
+
+</body>
+</html>

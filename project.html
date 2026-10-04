@@ -82,6 +82,49 @@
       width: 200%;
       animation: marquee 24s linear infinite;
     }
+
+    /* ===== REVIEWS — real-time feedback feed ===== */
+    .review-track {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+    .review-track::-webkit-scrollbar { display: none; }
+    .review-card {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .review-card.is-new { animation: reviewEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    @keyframes reviewEnter {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .review-star { color: #5c403f; transition: color 0.2s ease, transform 0.2s ease; }
+    .review-star.is-on { color: #ff7f1c; }
+    .review-star-btn.is-on { color: #ff7f1c; transform: translateY(-1px) scale(1.08); }
+    .review-lamp { animation: reviewPulse 1.8s ease-in-out infinite; }
+    @keyframes reviewPulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.2; }
+    }
+    .review-progress { transform: scaleX(0); transform-origin: left center; }
+    .review-progress.is-running { animation: reviewProgress var(--review-progress, 6500ms) linear forwards; }
+    @keyframes reviewProgress {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    .review-dot[aria-current="true"] { background: #ff7f1c; border-color: #ff7f1c; }
+    .review-bar-fill { transform-origin: left center; transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    button[data-reviews-prev]:disabled,
+    button[data-reviews-next]:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .review-card.is-new,
+      .review-lamp,
+      .review-progress.is-running { animation: none; }
+      .review-track { scroll-behavior: auto; }
+    }
   </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script id="tailwind-config">
@@ -465,6 +508,159 @@
         </div>
       </section>
 
+      <!-- REVIEWS // REAL-TIME FEED -->
+      <section id="reviews" class="w-full bg-surface-container-lowest border-y border-surface-container-highest" data-reviews-root>
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin py-space-xl">
+
+          <!-- Section header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-lg border-b border-surface-container-highest">
+            <div class="flex flex-col gap-space-xs">
+              <div class="flex items-center gap-space-xs font-code-tag text-code-tag text-secondary uppercase tracking-widest">
+                <span>// CLIENT SIGNAL</span>
+                <span class="text-outline">[FEED_OPEN]</span>
+              </div>
+              <h3 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-tighter">Real-Time <span class="text-primary-container">Reviews</span></h3>
+              <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Client feedback timestamped the second it lands. Ratings, averages and the feed itself update live — no reload, no stale quotes.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-space-sm">
+              <div class="flex items-center gap-space-xs border border-surface-container-highest bg-surface-container-low px-space-sm py-1 font-code-micro text-code-micro uppercase tracking-widest text-on-surface">
+                <span class="review-lamp w-2 h-2 bg-secondary-container inline-block" data-reviews-lamp></span>
+                <span data-reviews-mode>FEED: BOOTING</span>
+              </div>
+              <div class="border border-surface-container-highest bg-surface-container-low px-space-sm py-1 font-code-micro text-code-micro uppercase tracking-widest text-on-surface-variant">
+                NBO_SYNC: <span data-reviews-clock>--:--:--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aggregate + carousel -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 mt-space-lg border border-surface-container-highest bg-surface-container-low">
+
+            <!-- Aggregate panel -->
+            <div class="lg:col-span-4 p-space-lg md:p-space-xl border-b lg:border-b-0 lg:border-r border-surface-container-highest flex flex-col justify-between gap-space-lg">
+              <div>
+                <div class="font-code-micro text-code-micro text-outline uppercase tracking-widest">// AGGREGATE_RATING</div>
+                <div class="mt-space-sm flex items-end gap-space-sm">
+                  <span class="font-display-hero text-display-hero font-black tracking-tighter leading-none text-secondary-container" data-reviews-average>—</span>
+                  <span class="font-code-tag text-code-tag text-outline pb-2">/ 5.0</span>
+                </div>
+                <div class="mt-space-sm flex items-center gap-space-xs" data-reviews-average-stars role="img" aria-label="Average rating"></div>
+                <p class="mt-space-sm font-body-sm text-body-sm text-on-surface-variant"><span data-reviews-count>0</span> client reports in the live feed.</p>
+              </div>
+              <div class="flex flex-col gap-1.5" data-reviews-distribution aria-label="Rating distribution"></div>
+            </div>
+
+            <!-- Carousel panel -->
+            <div class="lg:col-span-8 p-space-lg md:p-space-xl flex flex-col">
+              <div class="flex items-center justify-between gap-space-sm">
+                <div class="font-code-micro text-code-micro text-outline uppercase tracking-widest">// FEED_STREAM</div>
+                <div class="flex items-center gap-space-xs">
+                  <button type="button" data-reviews-prev class="w-9 h-9 flex items-center justify-center border border-surface-container-highest bg-surface-container-lowest text-on-surface hover:bg-secondary-container hover:text-surface-container-lowest hover:border-secondary-container transition-colors" aria-label="Previous review">
+                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                  </button>
+                  <button type="button" data-reviews-next class="w-9 h-9 flex items-center justify-center border border-surface-container-highest bg-surface-container-lowest text-on-surface hover:bg-secondary-container hover:text-surface-container-lowest hover:border-secondary-container transition-colors" aria-label="Next review">
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-space-md -mx-space-xs px-space-xs">
+                <div class="review-track flex gap-space-md overflow-x-auto pb-space-sm" data-reviews-track tabindex="0" role="region" aria-label="Client reviews, scrollable"></div>
+              </div>
+
+              <div class="mt-space-sm flex items-center gap-space-md">
+                <div class="flex items-center gap-space-xs" data-reviews-dots role="tablist" aria-label="Review pages"></div>
+                <div class="flex-1 h-[3px] bg-surface-container-highest overflow-hidden hidden sm:block">
+                  <div class="review-progress h-full w-full bg-secondary-container" data-reviews-progress></div>
+                </div>
+                <span class="font-code-micro text-code-micro text-outline uppercase tracking-widest shrink-0"><span data-reviews-position>01</span>/<span data-reviews-total>00</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission -->
+          <div class="mt-space-lg grid grid-cols-1 lg:grid-cols-12 border border-surface-container-highest bg-surface-container-low">
+            <div class="lg:col-span-5 p-space-lg md:p-space-xl border-b lg:border-b-0 lg:border-r border-surface-container-highest flex flex-col justify-between gap-space-lg">
+              <div>
+                <div class="font-code-micro text-code-micro text-outline uppercase tracking-widest">// LEAVE_A_REPORT</div>
+                <h4 class="mt-space-sm font-headline-md text-headline-md uppercase text-on-surface tracking-tight leading-none">Drop it in the <span class="text-secondary-container">feed.</span></h4>
+                <p class="mt-space-sm font-body-md text-body-md text-on-surface-variant">Your report publishes to the live feed instantly and syncs to WhatsApp for verification.</p>
+              </div>
+              <ul class="flex flex-col gap-space-xs font-code-micro text-code-micro uppercase tracking-wider text-on-surface-variant">
+                <li class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 bg-secondary-container inline-block"></span> Instant publish, no waiting</li>
+                <li class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 bg-primary-container inline-block"></span> Live timestamps &amp; running average</li>
+                <li class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 bg-secondary-container inline-block"></span> Swipe on mobile, arrows on desktop</li>
+              </ul>
+            </div>
+
+            <form class="lg:col-span-7 p-space-lg md:p-space-xl flex flex-col gap-space-md" data-reviews-form novalidate>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                <label class="flex flex-col gap-space-xs">
+                  <span class="font-code-micro text-code-micro uppercase tracking-widest text-outline">Name / Handle *</span>
+                  <input type="text" name="reviewName" maxlength="48" autocomplete="name" required class="w-full bg-surface-container-lowest border border-surface-container-highest px-space-sm py-2 font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-secondary-container focus:outline-none" placeholder="e.g. Wanjiku M.">
+                </label>
+                <label class="flex flex-col gap-space-xs">
+                  <span class="font-code-micro text-code-micro uppercase tracking-widest text-outline">Project / Business</span>
+                  <select name="reviewProject" class="w-full bg-surface-container-lowest border border-surface-container-highest px-space-sm py-2 font-body-md text-body-md text-on-surface focus:border-secondary-container focus:outline-none">
+                    <option value="Mercy Rolling Skating Nation">Mercy Rolling Skating Nation</option>
+                    <option value="Cedar Haven">Cedar Haven</option>
+                    <option value="Jennie Birthday Website">Jennie Birthday Website</option>
+                    <option value="Other / New Project">Other / New Project</option>
+                  </select>
+                </label>
+              </div>
+
+              <fieldset class="flex flex-col gap-space-xs">
+                <legend class="font-code-micro text-code-micro uppercase tracking-widest text-outline">Rating *</legend>
+                <div class="flex items-center gap-space-xs" data-reviews-star-input></div>
+              </fieldset>
+
+              <label class="flex flex-col gap-space-xs">
+                <span class="font-code-micro text-code-micro uppercase tracking-widest text-outline">Your Report *</span>
+                <textarea name="reviewQuote" rows="4" maxlength="420" required class="w-full bg-surface-container-lowest border border-surface-container-highest px-space-sm py-2 font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-secondary-container focus:outline-none resize-y" placeholder="How was the build, the handover, the load speed?"></textarea>
+                <span class="font-code-micro text-code-micro uppercase tracking-widest text-outline text-right"><span data-reviews-chars>0</span>/420</span>
+              </label>
+
+              <div class="flex flex-col sm:flex-row sm:items-center gap-space-md">
+                <button type="submit" class="inline-flex items-center justify-center gap-space-xs bg-primary-container hover:bg-secondary-container text-on-surface font-headline-sm text-headline-sm uppercase px-space-lg py-space-sm tracking-tight transition-all duration-150">
+                  <span>Publish Report</span>
+                  <span class="font-code-tag text-code-tag">→</span>
+                </button>
+                <p class="font-code-micro text-code-micro uppercase tracking-wider text-secondary" data-reviews-status role="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </div>
+
+          <p class="mt-space-md font-code-micro text-code-micro uppercase tracking-widest text-outline">
+            Feed refreshes every 8s // new reports appear instantly across open tabs
+          </p>
+        </div>
+
+        <!-- Card template (kept in markup so its classes are generated up-front) -->
+        <template data-reviews-template>
+          <article class="review-card w-[82vw] max-w-[340px] shrink-0 bg-surface-container border border-surface-container-highest p-space-md flex flex-col justify-between hover:border-secondary-container transition-colors duration-300">
+            <div class="flex items-start justify-between gap-space-sm">
+              <div class="flex items-center gap-1" data-slot="stars" role="img"></div>
+              <span class="shrink-0 bg-surface-container-lowest border border-surface-container-highest px-space-xs py-0.5 font-code-micro text-code-micro uppercase tracking-widest text-secondary" data-slot="badge">FEED</span>
+            </div>
+            <blockquote class="mt-space-md font-body-md text-body-md text-on-surface leading-relaxed" data-slot="quote"></blockquote>
+            <div class="mt-space-md pt-space-sm border-t border-surface-container-highest flex items-center justify-between gap-space-sm">
+              <div class="flex items-center gap-space-sm min-w-0">
+                <div class="w-9 h-9 shrink-0 bg-secondary-container text-surface-container-lowest flex items-center justify-center font-headline-sm text-headline-sm" data-slot="initials">B</div>
+                <div class="min-w-0">
+                  <div class="font-headline-sm text-headline-sm uppercase text-on-surface truncate" data-slot="name"></div>
+                  <div class="font-code-micro text-code-micro uppercase text-on-surface-variant truncate" data-slot="meta"></div>
+                </div>
+              </div>
+              <div class="shrink-0 text-right">
+                <div class="font-code-micro text-code-micro uppercase text-outline" data-slot="time"></div>
+                <div class="font-code-micro text-code-micro uppercase text-secondary truncate max-w-[120px]" data-slot="project"></div>
+              </div>
+            </div>
+          </article>
+        </template>
+      </section>
+
       <!-- PROCESS SECTION -->
       <section class="w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin py-space-xl">
         <div class="flex flex-col gap-space-xs mb-space-lg">
@@ -622,6 +818,7 @@
     })();
   </script>
   <script src="analytics.js" defer></script>
+  <script src="reviews.js" defer></script>
 </body>
 <script src="main.js" defer></script>
 </html>

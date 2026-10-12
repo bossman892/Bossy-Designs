@@ -33,6 +33,16 @@
     // Maximum reports rendered at once
     maxCards: 30,
 
+    // Firebase Cloud Firestore configuration
+    firebase: {
+      apiKey: "AIzaSyClYDUr7xSA8nNp03fSXQtIeCPRUsGTGzI",
+      authDomain: "bossy-designs.firebaseapp.com",
+      projectId: "bossy-designs",
+      storageBucket: "bossy-designs.firebasestorage.app",
+      messagingSenderId: "981412205229",
+      appId: "1:981412205229:web:e3369ce9950c6c2b576c24"
+    },
+
     // Optional live source. Point `endpoint` at any JSON that returns
     // { reviews: [{ name, rating, quote, project, createdAt, source }] }
     // Leave null to run fully offline.
@@ -196,7 +206,64 @@
       };
     }
 
+    function getDb() {
+      if (typeof window === 'undefined' || typeof window.firebase === 'undefined') return null;
+      if (!CONFIG.firebase || !CONFIG.firebase.projectId) return null;
+      try {
+        if (!firebase.apps || !firebase.apps.length) {
+          firebase.initializeApp(CONFIG.firebase);
+        }
+        return firebase.firestore();
+      } catch (err) {
+        if (window.console && console.warn) console.warn('[Reviews] Firebase init error:', err);
+        return null;
+      }
+    }
+
     async function fetchRemote() {
+      // Firebase Firestore pull
+      const db = getDb();
+      if (db) {
+        try {
+          let snapshot;
+          try {
+            snapshot = await db.collection('reviews')
+              .orderBy('createdAt', 'desc')
+              .limit(CONFIG.maxCards)
+              .get();
+          } catch (orderErr) {
+            snapshot = await db.collection('reviews')
+              .limit(CONFIG.maxCards)
+              .get();
+          }
+
+          if (snapshot && !snapshot.empty) {
+            const list = [];
+            snapshot.forEach((doc) => {
+              const data = doc.data() || {};
+              list.push(
+                normalise(
+                  {
+                    id: doc.id,
+                    name: data.name,
+                    rating: data.rating,
+                    quote: data.quote,
+                    project: data.project,
+                    createdAt: data.createdAt,
+                    verified: data.verified === true,
+                    source: 'firebase'
+                  },
+                  'firebase'
+                )
+              );
+            });
+            return list.filter(Boolean);
+          }
+        } catch (err) {
+          if (window.console && console.warn) console.warn('[Reviews] Firebase sync failed:', err);
+        }
+      }
+
       // Optional Google Places pull
       if (CONFIG.google.placeId && CONFIG.google.apiKey) {
         try {
@@ -286,7 +353,7 @@
       return merge();
     }
 
-    return { sync: sync, publish: publish, merge: merge };
+    return { sync: sync, publish: publish, merge: merge, getDb: getDb };
   })();
 
   /* ==========================================================================
@@ -769,6 +836,29 @@
         Feed.play();
       }
 
+      // Save directly to Firebase Firestore
+      const db = Store.getDb();
+      if (db) {
+        db.collection('reviews').add({
+          name: name,
+          rating: clampRating(state.rating),
+          quote: quote,
+          project: project,
+          createdAt: Date.now(),
+          verified: false
+        }).then(function () {
+          Store.sync().then(function (fresh) {
+            if (fresh && fresh.length) {
+              state.reviews = fresh;
+              Aggregate.render();
+              Feed.render();
+            }
+          });
+        }).catch(function (err) {
+          if (window.console && console.warn) console.warn('[Reviews] Firebase save failed:', err);
+        });
+      }
+
       form.reset();
       if (charEl) charEl.textContent = '0';
 
@@ -823,6 +913,18 @@
       Aggregate.render();
       Feed.render();
       Feed.play();
+
+      // Immediately sync with Firebase on initial page load
+      Store.sync().then(function (fresh) {
+        if (!fresh || !fresh.length) return;
+        const sig = fresh.map((r) => r.id).join('|');
+        if (sig === state.signature) return;
+        state.signature = sig;
+        state.reviews = fresh;
+        Aggregate.render();
+        Feed.render();
+        Feed.play();
+      });
 
       // Live refresh loop
       window.setInterval(async function () {

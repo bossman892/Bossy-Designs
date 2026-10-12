@@ -343,6 +343,10 @@
       state.syncing = true;
       state.remote = await fetchRemote();
       state.syncing = false;
+      // When connected to Firebase, the cloud database is the source of truth
+      if (CONFIG.firebase && CONFIG.firebase.projectId && Array.isArray(state.remote)) {
+        writeLocal([]);
+      }
       return merge();
     }
 
